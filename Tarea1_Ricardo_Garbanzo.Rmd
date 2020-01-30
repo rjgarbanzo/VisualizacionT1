@@ -1,0 +1,49 @@
+---
+title: "VisualizacionT1"
+author: "Ricardo Garbanzo"
+date: "January 29, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Ejercicio 1. [5 puntos] 
+### Con base en su experiencia indique posibles aplicaciones de la visualizacion de datos en su entono profecional asi como que tipo de visualizaciones espera poder desarrollar al analizar el curso.
+
+### Respuesta
+
+La metodologías de desarrollo de software que están de moda, los desarrolladores utilizan herramientas para estimar cuanto esfuerzo se puede tomar una tarea en ser completada. Esto es de suma importancia para determinar la velocidad con la que un desarrollador o equipo de desarrolladores pueden entregar un producto de valor para le empresa, por lo tanto un correcta estimación es de suma importancia. 
+Al realizar un seguimiento de la estimación y compararlo con el valor real al final el periodo, podría generar información importante para los administradores de proyectos que permita mejorar el proceso de estimación o indentificar oportunidades de mejora.
+
+
+
+# Ejercicio 2
+## Explique de la forma mas detallada posible cada una de las lineas del siguiente codigo.
+
+
+
+`library ( ggplot 2)` 
+
+`library ( scales )` 
+
+`ggplot ( data = diamonds , mapping = aes (x = color )) +`
+
+`geom _bar ( fill = " steelblue ") +`
+
+`geom _ text ( mapping = aes ( label = comma ( stat ( count ))) ,`
+
+`stat = " count ", vjust = -1) +`
+
+`labs (y = " Cantidad  de  diamantes  por   color ",`
+
+`x = " Color ") +`
+
+`theme _ minimal ()`
+
+
+```{r Ejercicio 2}
+
+```
+
