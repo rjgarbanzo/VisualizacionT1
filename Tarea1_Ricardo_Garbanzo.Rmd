@@ -24,23 +24,31 @@ Al realizar un seguimiento de la estimación y compararlo con el valor real al f
 
 
 
-`library ( ggplot 2)` 
+`library ( ggplot 2)` Carga de paquete para mapeado de variables
 
-`library ( scales )` 
+`library ( scales )` Carga de Paquete para re escalado de datos haciendo uso de las observaciones
 
-`ggplot ( data = diamonds , mapping = aes (x = color )) +`
+`ggplot ( data = diamonds , mapping = aes (x = color )) +` ggplot permite indicar el dataframe por graficar y mapping permite especificar la informacion que conforma el plot, en este caso la variable color la cual es factor.
 
-`geom _bar ( fill = " steelblue ") +`
+`geom _bar ( fill = " steelblue ") +` el paquete ggplopt permite sumar parametros que dan forma al grafico, en este caso se indica que se utilizaran barras para representar la cantidad de observaciones de la por cada categoria de la variable color en x. 
 
-`geom _ text ( mapping = aes ( label = comma ( stat ( count ))) ,`
+`geom _ text ( mapping = aes ( label = comma ( stat ( count ))) , stat = " count ", vjust = -1) +` geom_text agrega una etiqueta al maping el cual es un conteo de la cantidad de observaciones por cada variable. De igual forma se indica que la etiqueta debe colocarse por arriba del mapeo.
 
-`stat = " count ", vjust = -1) +`
+`labs (y = " Cantidad  de  diamantes  por   color ",` se agrega una etiqueta al eje y para indicar cual es la informacion representada en ese eje.
 
-`labs (y = " Cantidad  de  diamantes  por   color ",`
+`x = " Color ") +` se agregar informacion de la informacion representada en el eje x
 
-`x = " Color ") +`
+`theme _ minimal ()`aplica un tema minimalista al grafico, en este caso el fondo transparente con cuadriculado
 
-`theme _ minimal ()`
+
+# Ejercicio 3
+
+## 3. [25 puntos] Utilizando el paquete ggplot2 y el conjunto de datos agresores.csv el cual contiene la siguiente variables:
+
+### a) Describa de forma detallada el gra´ﬁco que quiere realizar. 
+### b) Desarrolle el c´odigo en R necesario para poder realizar el gr´aﬁco. 
+### c) Describe linea por l´ınea el c´odigo presentado explicando que hacen cada una de las funciones.
+
 
 
 ```{r Ejercicio 2}
