@@ -39,13 +39,15 @@ datos_grafico <- cbind(datos_grafico,
 
 
 head(datos_grafico)
+library(ggplot2)
 
 
 ggplot(datos_grafico, aes(x=datos_grafico$Dim.1, y=datos_grafico$Dim.2)) +
-  geom_point()+
+  geom_point(aes(color = ifelse(datos_grafico$Cos2 > 0.5, "black", "red")))+
   labs (y = datos_grafico$Iner.y,
         x = datos_grafico$Iner.x)+
-  geom_text(mapping = aes(label = (row.names(datos_grafico))))
+  geom_text(mapping = aes(label = (row.names(datos_grafico))))+
+  scale_color_identity()
 
 
-
+datos_grafico$Cos2

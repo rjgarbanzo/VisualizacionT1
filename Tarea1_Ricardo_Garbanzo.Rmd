@@ -148,12 +148,28 @@ head(datos_grafico)
 ## d) El subtitulo del grafco debe indicar una pequena descripcion de los datos así como indicar el total de inercia explicada.
 
 ```{r}
+library(ggplot2)
+
 ggplot(datos_grafico, aes(x=datos_grafico$Dim.1, y=datos_grafico$Dim.2)) +
-  geom_point()+
+  geom_point(aes(color = ifelse(datos_grafico$Cos2 > 0.5, "black", "red")))+
   labs (y = datos_grafico$Iner.y,
         x = datos_grafico$Iner.x)+
-  geom_text(mapping = aes(label = (row.names(datos_grafico))))
+  geom_text(mapping = aes(label = (row.names(datos_grafico))))+
+  scale_color_identity()+
+  labs(title = "El grafico permite observar la relación entre los paises con las temperaturas mas bajas.", x = "Inercia X", y = "Inercia Y")
+
 ```
 
 
+
+# Ejercicio 5
+## 5. [25 puntos] Utilizando datos propios cree 3 graficos distintos siguiendo las siguiente indicaciones para cada uno de ellos.
+
+### a) Explique en que consisten los datos, asi como los tipos de variables que contiene la tabla.
+
+### b) Identifique las variables que desea representar en el grafico.
+
+### c) Seleccione un tipo de grafico y justifique porque considera es la mejor opcion para ese caso.
+
+### d) Utilizando el paquete ggplot2 y todos los demas paquete que considere necesarios disene un grafico que permite mostrar de forma clara las variables seleccionadas.
 
