@@ -45,13 +45,48 @@ Al realizar un seguimiento de la estimación y compararlo con el valor real al f
 
 ## 3. [25 puntos] Utilizando el paquete ggplot2 y el conjunto de datos agresores.csv el cual contiene la siguiente variables:
 
-### a) Describa de forma detallada el gra´ﬁco que quiere realizar. 
-### b) Desarrolle el c´odigo en R necesario para poder realizar el gr´aﬁco. 
-### c) Describe linea por l´ınea el c´odigo presentado explicando que hacen cada una de las funciones.
+### a) Describa de forma detallada el graﬁco que quiere realizar. 
+
+Me interesa realizar un gráfico que permita visualizar la cantidad de casos por rango de edad y diferenciado entre los casos en que el agresor es hombre o mujer.
+
+### b) Desarrolle el codigo en R necesario para poder realizar el graﬁco.
 
 
-
-```{r Ejercicio 2}
+```{r Ejercicio 3}
+library(ggplot2)
+datos <- read.csv("agresores.csv", sep = ",")
+ggplot(datos, aes(x=datos$rango_edad, y=datos$cantidad, fill=datos$sexo)) +
+  geom_col(colour = "black") +
+  scale_y_continuous(breaks = c(0,2000,4000,6000,8000,10000,12000,14000,16000,18000)) +
+  labs(title = "Ejercicio 3 - Agresores", x = "Rando de edad", y = "Cantidad de casos") +
+  theme_classic() +
+  scale_fill_brewer(palette = "Paired")
 
 ```
+
+
+
+
+### c) Describe linea por lınea el codigo presentado explicando que hacen cada una de las funciones.
+
+`datos <- read.csv("agresores.csv", sep = ",")` Carga de datos agresor
+
+`ggplot(datos, aes(x=datos$rango_edad, y=datos$cantidad, fill=datos$sexo)) +` se establece un plot con esteticas, rango de edad para el eje X y cantidad de casos para el eje Y. De igual forma se utiliza el parametro fill para establecer una diferencia de colores según la categoría sexo 
+
+  `geom_col(colour = "black") +` Se utiliza para delinear las columnas con un color negro
+
+ ` scale_y_continuous(breaks = c(0,2000,4000,6000,8000,10000,12000,14000,16000,18000)) +` Se modifica la escala del eje Y para tener una mejor referencia de cuanto representa cada columna según el rango.
+
+  `labs(title = "Ejercicio 3 - Agresores", x = "Rando de edad", y = "Cantidad de casos") +` Con esta linea se le agrega una etiqueta al eje X y al eje Y. Tambien se le aplica un titulo al gráfico.
+
+ ` theme_classic() +` Se le aplica al plot un tema clásico el cual elimina el cuadriculado del fondo
+
+ ` scale_fill_brewer(palette = "Paired")` aplica una paleta de colores pre establecidos al geom_col
+
+
+
+
+
+
+
 
