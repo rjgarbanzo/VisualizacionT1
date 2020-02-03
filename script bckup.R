@@ -51,3 +51,81 @@ ggplot(datos_grafico, aes(x=datos_grafico$Dim.1, y=datos_grafico$Dim.2)) +
 
 
 datos_grafico$Cos2
+
+
+
+
+
+########################################################################################
+
+# Ejercicio 5
+
+library(forcats)
+datos <- read.csv("cost-of-living.csv", sep = ",", header = T)
+costoVida <- as.data.frame(colSums(datos[2:55]))
+colnames(costoVida) <- "Monto"
+
+
+ggplot(data = costoVida,
+       mapping = aes(
+         x = fct_reorder(rownames(costoVida), costoVida$Monto),
+         y = costoVida$Monto)) +
+  geom_col(fill = "#07689f") +
+  coord_flip() +
+  labs(title = "Costo de vida por país",
+       x = "Costo de Vida",
+       y = "Ciudades más caras para vivir" )
+  
+
+
+
+############
+library(plyr)
+library(dplyr)
+library(doBy)
+str(datos)
+
+# datos <- read.csv("players_20.csv", sep = ",", header = T)
+# datos <- select(datos,5, 10)
+# dtMean <- aggregate(datos[,1], list(datos$club), mean)
+
+
+datos <- read.csv("players_20.csv", sep = ",", header = T)
+datos <- select(datos, 5, 10, 13)
+suppressWarnings(dtMean <- aggregate(datos[,1:3], list(datos$club), mean))
+
+
+DatosMean <- dtMean[order(dtMean$value_eur),]
+DatosMean <- subset(DatosMean, DatosMean$value_eur > 14953667)
+
+
+ggplot(data = DatosMean,
+       mapping = aes(
+         x = DatosMean$age,
+         y = DatosMean$value_eur)) +
+  geom_point() +
+  labs(title = "Costo de vida por país",
+       x = "Promedio edad de Jugadores",
+       y = "Promedio valor de jugadores" )+
+  geom_text (mapping = aes(label=(DatosMean$Group.1)), vjust = -1)
+
+
+
+  ##########
+
+datos <- read.csv("AppleStore.csv", sep = ",", header = T)
+datos <- select(datos, 6,9,13)
+datos <- subset(datos, datos$price < 50)
+
+
+
+ggplot(data = datos,
+       mapping = aes(x = datos$price,y = datos$user_rating , color = datos$prime_genre)) +
+  geom_point() +
+  scale_x_continuous(breaks = c(-10,0,10,20,30,40,50))
+
++
+  labs(title = "Costo de vida por país",
+       x = "Promedio edad de Jugadores",
+       y = "Promedio valor de jugadores" )+
+  geom_text (mapping = aes(label=(DatosMean$Group.1)), vjust = -1)

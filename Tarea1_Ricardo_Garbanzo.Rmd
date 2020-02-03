@@ -147,7 +147,7 @@ head(datos_grafico)
 
 ## d) El subtitulo del grafco debe indicar una pequena descripcion de los datos así como indicar el total de inercia explicada.
 
-```{r}
+```{r Ejercicio 4.1}
 library(ggplot2)
 
 ggplot(datos_grafico, aes(x=datos_grafico$Dim.1, y=datos_grafico$Dim.2)) +
@@ -172,4 +172,67 @@ ggplot(datos_grafico, aes(x=datos_grafico$Dim.1, y=datos_grafico$Dim.2)) +
 ### c) Seleccione un tipo de grafico y justifique porque considera es la mejor opcion para ese caso.
 
 ### d) Utilizando el paquete ggplot2 y todos los demas paquete que considere necesarios disene un grafico que permite mostrar de forma clara las variables seleccionadas.
+
+### Grafico 1
+Es un data set de los paises mas caros para vivir en el mundo. Para representar los datos fue necesario realizar una suma de todos los montos por país y después alinearlos por medio de un plot de barras para representar correctamente la lista del más caro al menos caro.
+
+```{r Ejercicio 5 Grafico 1 }
+library(forcats)
+datos <- read.csv("cost-of-living.csv", sep = ",", header = T)
+costoVida <- as.data.frame(colSums(datos[2:55]))
+colnames(costoVida) <- "Monto"
+
+
+ggplot(data = costoVida,
+       mapping = aes(
+         x = fct_reorder(rownames(costoVida), costoVida$Monto),
+         y = costoVida$Monto)) +
+  geom_col(fill = "#07689f") +
+  coord_flip() +
+  labs(title = "Costo de vida por país",
+       x = "Costo de Vida",
+       y = "Ciudades más caras para vivir" )
+
+```
+
+
+### Grafico 2
+El data set de jugadores contiene la información de la plantilla de equipos de futbol europeo. En este caso mi interese fue hacer un análisis del promedio de edad de los jugadores así como el promedio del valor de los jugadores en el mercado de fichajes.
+```{r Ejercicio 5 Grafico 2, message=FALSE}
+library(dplyr)
+
+datos <- read.csv("players_20.csv", sep = ",", header = T)
+datos <- select(datos, 5, 10, 13)
+suppressWarnings(dtMean <- aggregate(datos[,1:3], list(datos$club), mean))
+
+DatosMean <- dtMean[order(dtMean$value_eur),]
+DatosMean <- subset(DatosMean, DatosMean$value_eur > 14953667)
+
+
+ggplot(data = DatosMean,
+       mapping = aes(
+         x = DatosMean$age,
+         y = DatosMean$value_eur)) +
+  geom_point() +
+  labs(title = "Costo de vida por país",
+       x = "Promedio edad de Jugadores",
+       y = "Promedio valor de jugadores" )+
+  geom_text (mapping = aes(label=(DatosMean$Group.1)), vjust = -1)
+
+
+```
+
+
+### Grafico 3
+El data set de AppleStore permite ver la información de apps descargados para el sistemas operativo de IOS. Por lo tanto se plantea información de los apps como precio y user rating. Se utiliza el color para observar los tipos de aplicaciones descargadas dentro del rango de precio y user rating.
+```{r Ejercicio 5 Grafico 3}
+library(ggplot2)
+datos <- read.csv("AppleStore.csv", sep = ",", header = T)
+datos <- select(datos, 6,9,13)
+datos <- subset(datos, datos$price < 50)
+
+ggplot(data = datos, mapping = aes(x = datos$price,y = datos$user_rating , color = datos$prime_genre)) +
+  geom_point() +
+  scale_x_continuous(breaks = c(-10,0,10,20,30,40,50))
+```
 
